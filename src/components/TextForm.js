@@ -5,15 +5,18 @@ export default function TextForm(props) {
   // Upper case
   const uppercase = () => {
     setText(text.toUpperCase());
+    props.showAlert('Converted to UpperCase', 'success');
   };
 
   // Lower Case
   const lowercase = () => {
     setText(text.toLowerCase());
+    props.showAlert('Converted to LowerCase', 'success');
   };
 
   // Camel Case
   const camelcase = () => {
+      props.showAlert('Converted to CamelCase', 'success');
       let newText = text.split(" ").map((currentValue) => {
           let newText = currentValue[0].toUpperCase() + currentValue.slice(1);
           return newText;
@@ -26,6 +29,7 @@ export default function TextForm(props) {
     let copiedText = document.getElementById('myBox');
     copiedText.select();
     navigator.clipboard.writeText(copiedText.value);
+    props.showAlert('Text Copied', 'warning');
   }
 
   // ON change event
@@ -37,7 +41,7 @@ export default function TextForm(props) {
   // text = "new text";  ----wrong way
   // setText = ("new text"); ---right way for updation of state
   return (
-    <>
+    <div className="container mt-3" style={{color: props.mode==='dark'?'white':'black'}}>
       <div className="container">
         <h1 className="my-2">{props.heading}</h1>
         <div className="mb-3">
@@ -46,7 +50,7 @@ export default function TextForm(props) {
             id="myBox"
             rows="8"
             value={text}
-            onChange={handleOnChange} style={{backgroundColor: props.mode==='light'?'light':'dark'}}
+            onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'#343a40':'white',color: props.mode==='dark'?'white':'black'} }
           ></textarea>
         </div>
         <button className="btn btn-primary" onClick={uppercase}>
@@ -67,8 +71,8 @@ export default function TextForm(props) {
         <p>{text.split(' ').length} words, {text.length} characters</p>
         <p>Reading time: {0.008*text.split(' ').length}</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length>0 ? text : "Enter something in the textbox to preview here"}</p>
       </div>
-    </>
+    </div>
   );
 }
