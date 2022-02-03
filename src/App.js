@@ -19,10 +19,19 @@ function App() {
     },2000);
   }
 
+  const tintColors = {
+    color1: 'rgb(81 18 0)',
+    color2: 'rgb(3 0 22)',
+    color3: 'rgb(22 0 0)',
+    color4: 'rgb(0 12 0)'
+  }
+
+  let tintColor = 'rgb(40,40,40)';
+
   const toggleMode = ()=> {
     if(mode === 'light'){
       setMode('dark');
-      document.body.style.backgroundColor = 'rgb(40,40,40)';
+      document.body.style.backgroundColor = `${tintColor}`;
       showAlert("Dark mode has been enabled", "success");
     }
     else{
@@ -33,7 +42,7 @@ function App() {
   }
   return (
     <>
-      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode}/>
+      <Navbar title="TextUtils" mode={mode} toggleMode={toggleMode} tintColors={tintColors}/>
       <Alert alert={alert}/>
       <TextForm showAlert={showAlert} heading="Enter the text to annalyze below" mode={mode}/>
       {/* <About/> */}
