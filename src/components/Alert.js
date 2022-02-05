@@ -3,7 +3,7 @@ import React from "react";
 export default function Alert(props) {
     if(props.alert !== null){
         return (
-          <div>
+          <div style={{height: '50px'}}>
             <div className={`alert alert-${props.alert.type} alert-dismissible fade show`} role="alert">
               <strong> {props.alert.msg}</strong>
             </div>
@@ -12,7 +12,7 @@ export default function Alert(props) {
     }
     else{
         return(
-            <div>
+            <div style={{height: '50px'}}>
             </div>
         );
     }

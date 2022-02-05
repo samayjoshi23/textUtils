@@ -51,8 +51,9 @@ function App() {
           <Alert alert={alert} />
 
           <Routes>
-            <Route exact path="/" element={<TextForm showAlert={showAlert} heading="Enter the text to annalyze below" mode={mode}/>} />
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/" element={<TextForm showAlert={showAlert} heading="Try TextUtils - Word Counter, Character Counter, Remove Extra Spaces" mode={mode}/>} />
+            {/* <TextForm showAlert={showAlert} heading="Enter the text to annalyze below" mode={mode}/> */}
+            <Route exact path="/about" element={<About mode={mode}/>} />
           </Routes>
         </BrowserRouter>
     </>

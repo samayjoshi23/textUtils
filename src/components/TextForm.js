@@ -28,7 +28,8 @@ export default function TextForm(props) {
   const copyText = () => {
     let copiedText = document.getElementById('myBox');
     copiedText.select();
-    navigator.clipboard.writeText(copiedText.value);
+    navigator.clipboard.writeText(copiedText);
+    document.getSelection().removeAllRanges();
     props.showAlert('Text Copied', 'warning');
   }
 
@@ -43,7 +44,7 @@ export default function TextForm(props) {
   return (
     <div className="container mt-3" style={{color: props.mode==='dark'?'white':'black'}}>
       <div className="container">
-        <h1 className="my-2">{props.heading}</h1>
+        <h1 className="my-3">{props.heading}</h1>
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -53,25 +54,25 @@ export default function TextForm(props) {
             onChange={handleOnChange} style={{backgroundColor: props.mode==='dark'?'#343a40':'white',color: props.mode==='dark'?'white':'black'} }
           ></textarea>
         </div>
-        <button className="btn btn-primary" onClick={uppercase}>
+        <button disabled={text.length===0} className="btn btn-primary m-2" onClick={uppercase}>
           Uppercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={lowercase}>
+        <button disabled={text.length===0} className="btn btn-primary m-2" onClick={lowercase}>
           Lowercase
         </button>
-        <button className="btn btn-primary mx-2" onClick={camelcase}>
+        <button disabled={text.length===0} className="btn btn-primary m-2" onClick={camelcase}>
           Camelcase
         </button>
-        <button className="btn btn-primary mx-2" onClick={copyText}>
+        <button disabled={text.length===0} className="btn btn-primary m-2" onClick={copyText}>
           Copy Text
         </button>
       </div>
       <div className="container my-4">
         <h2>Your text summary</h2>
-        <p>{text.split(' ').length} words, {text.length} characters</p>
-        <p>Reading time: {0.008*text.split(' ').length}</p>
+        <p>{text.split('/\s+/').filter((element)=>{return element.length!==0}).length} words, {text.length} characters</p>
+        <p>Reading time: {0.008*text.split(' ').filter((element)=>{return element.length!==0}).length}</p>
         <h2>Preview</h2>
-        <p>{text.length>0 ? text : "Enter something in the textbox to preview here"}</p>
+        <p>{text.length>0 ? text : "Nothing to preview"}</p>
       </div>
     </div>
   );
